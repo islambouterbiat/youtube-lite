@@ -8,6 +8,10 @@ class App extends Component {
     selectedVideo: null,
   };
 
+  componentDidMount() {
+    this.handleSubmit("reactjs");
+  }
+
   handleSubmit = async (searchQuery) => {
     console.log(searchQuery);
     const {
@@ -24,6 +28,10 @@ class App extends Component {
     this.setState({ videos: items, selectedVideo: items[0] });
   };
 
+  onVideoSelect = (video) => {
+    this.setState({ SelectedVideo: video });
+  };
+
   render() {
     const { videos, selectedVideo } = this.state;
     return (
@@ -38,7 +46,7 @@ class App extends Component {
             <SelectedVideo video={selectedVideo} />
           </div>
           <div className="col-md-4 col-10">
-            <VideoList videos={videos} />
+            <VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
           </div>
         </div>
       </div>
