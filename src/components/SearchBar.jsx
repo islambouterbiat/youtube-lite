@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
-function SearchBar({ value, onChange }) {
+function SearchBar({ onSubmit }) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleChange = (e) => {
+    setSearchQuery(e.currentTarget.value);
+    console.log(searchQuery);
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") onSubmit(searchQuery);
+  };
+
   return (
     <div className="form-group">
       <input
-        value={value}
-        onChange={(e) => onChange(e.currentTarget.value)}
+        value={searchQuery}
+        onChange={handleChange}
+        onKeyPress={onKeyPress}
         name="query"
         type="text"
         className="form-control mt-3"
